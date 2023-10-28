@@ -1,0 +1,15 @@
+###
+# @name get appwrite wellknown configuration
+GET http://localhost:8080
+X-WK-TOKEN: test
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        let type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+ %}
