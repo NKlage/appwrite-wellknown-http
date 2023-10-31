@@ -5,3 +5,4 @@ analyzer:
 linter:
   rules:
     file_names: false
+    always_use_package_imports: false

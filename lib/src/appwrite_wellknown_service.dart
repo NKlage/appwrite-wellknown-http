@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_appwrite/dart_appwrite.dart';
@@ -32,31 +33,35 @@ class AppwriteWellknownService {
         headers: {'x-wk-token': environment.tokenSecret},
       );
 
-      final response = functionResult.responseBody;
+      final response =
+          jsonDecode(functionResult.responseBody) as Map<String, dynamic>;
 
       if (HttpStatus.ok == functionResult.responseStatusCode) {
-        return AppwriteResponse(code: HttpStatus.ok, body: response);
+        return AppwriteResponse(
+          code: HttpStatus.ok,
+          body: response,
+        );
       }
 
       return AppwriteResponse(
         code: functionResult.responseStatusCode,
-        body: functionResult.errors,
+        body: {'error': functionResult.errors},
       );
     } on AppwriteException catch (e) {
       return AppwriteResponse(
         code: e.code ?? HttpStatus.internalServerError,
-        body: e.message ?? '',
+        body: {'error': e.message},
         error: e,
       );
     } on EnvironmentException catch (e) {
       return AppwriteResponse(
-        body: e.message,
+        body: {'error': e.message},
         code: e.code,
       );
     } catch (e) {
       return AppwriteResponse(
         code: HttpStatus.internalServerError,
-        body: '',
+        body: {},
         error: e,
       );
     }

@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      - name: Verify formatting
+      - name: Prepare
         run: make build-runner
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
