@@ -20,17 +20,18 @@ void main() {
     // Act
 
     // Assert
-
     expect(
       () => throwIfMissing(env, allEnvVariables),
-      throwsA((dynamic e) =>
-          e is EnvironmentException && e.message == expectedMessage),
+      throwsA(
+        (dynamic e) =>
+            e is EnvironmentException && e.message == expectedMessage,
+      ),
     );
   });
 
   test(
-      'throwIfMissing should throw EnvironmentException if value is empty string',
-      () async {
+      'throwIfMissing should throw EnvironmentException if value is empty '
+      'string', () async {
     // Arrange
     final env = {
       'APPWRITE_ENDPOINT': 'http://cloud.appwrite.local/v1',
@@ -45,8 +46,10 @@ void main() {
     // Assert
     expect(
       () => throwIfMissing(env, allEnvVariables),
-      throwsA((dynamic e) =>
-          e is EnvironmentException && e.message == expectedMessage),
+      throwsA(
+        (dynamic e) =>
+            e is EnvironmentException && e.message == expectedMessage,
+      ),
     );
   });
 

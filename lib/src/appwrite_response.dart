@@ -11,7 +11,7 @@ class AppwriteResponse {
   final int code;
 
   /// Response Body
-  final String body;
+  final Map<String, dynamic> body;
 
   /// Error from Appwrite Services
   final dynamic error;

@@ -22,10 +22,12 @@ void main() {
         (_) => Future.value(IndexTestData.wellknownOkResponse),
       );
       final response = await route.onRequest(context);
+      final body = await response.body();
+
       expect(response.statusCode, equals(HttpStatus.ok));
       expect(
-        response.body(),
-        completion(equals(IndexTestData.validWellknownJson)),
+        body,
+        IndexTestData.validWellknownJson,
       );
       expect(
         response.headers[HttpHeaders.contentTypeHeader],
